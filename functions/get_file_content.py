@@ -36,4 +36,4 @@ def get_file_content(working_directory, file_path):
 
     # catches errors raised by the standard library functions
     except Exception as e:
-        return f"Error reading file: {e}"
+        return f'Error reading file "{file_path}": {e}'
