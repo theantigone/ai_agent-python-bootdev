@@ -9,6 +9,7 @@ def get_files_info(working_directory, directory=None):
     target_dir = abs_working_dir
 
     # creates an absolute path of the working directory and directory if directory exists
+    # if the directory is outside of the working directory, the directory path overrides the working directory
     if directory:
         target_dir = os.path.abspath(os.path.join(working_directory, directory))
 
@@ -29,7 +30,10 @@ def get_files_info(working_directory, directory=None):
 
             # returns the filename, file size, and file type
             filepath = os.path.join(target_dir, filename)
+
+            # NOTE: this declaration is needed in case the filepath cannot be found
             file_size = 0
+
             is_dir = os.path.isdir(filepath)
             file_size = os.path.getsize(filepath)
             files_info.append(
@@ -40,3 +44,36 @@ def get_files_info(working_directory, directory=None):
     # checks if the working directory is invalid
     except Exception as e:
         return f"Error listing files: {e}"
+
+
+def get_file_content(working_directory, file_path):
+
+    # creates an absolute path of the working directory
+    abs_working_dir = os.path.abspath(working_directory)
+
+    # appends the file path to the absolute working directory
+    # again, if the file path is outside of the working directory, then the file path will override it
+    target_file = os.path.join(abs_working_dir, file_path)
+
+    # checks if the file path is inside the working directory
+    if not target_file.startswith(abs_working_dir):
+        return f'Error: Cannot read "{file_path}" as it is outside the permitted working directory'
+
+    # checks if the file path is a file
+    if not os.path.isfile(target_file):
+        return f'Error: File not found or is not a regular file: "{file_path}"'
+
+    # passes all checks; the file path is a file that's inside the working directory
+    try:
+        MAX_CHARS = 10000
+
+        # opens the contents of the file and reads it up to the 10,000th character
+        with open(target_file, "r") as f:
+            file_content_string = f.read(MAX_CHARS)
+            if os.path.getsize(target_file) > MAX_CHARS:
+                return f'{file_content_string}...File "{file_path}" truncated at 10000 characters'
+            return file_content_string
+
+    # catches errors raised by the standard library functions
+    except Exception as e:
+        return f"Error reading file: {e}"
