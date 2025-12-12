@@ -3,7 +3,6 @@ from config import MAX_CHARS
 
 
 def get_file_content(working_directory, file_path):
-
     # creates an absolute path of the working directory
     abs_working_dir = os.path.abspath(working_directory)
 
@@ -21,7 +20,6 @@ def get_file_content(working_directory, file_path):
 
     # passes all checks; the file path is a file that's inside the working directory
     try:
-
         # opens the contents of the file and reads it up to the 10,000th character
         with open(abs_file_path, "r") as f:
             file_content_string = f.read(MAX_CHARS)
