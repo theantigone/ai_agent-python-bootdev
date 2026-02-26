@@ -5,6 +5,8 @@
 
 - [Description](#description)
 - [Prerequisites](#prerequisites)
+- [Learning Goals](#learning-goals)
+- [Installation](#installation)
 - [Running the Agentic AI](#running-the-agentic-ai)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -14,6 +16,20 @@
 A guided project from [boot.dev](https://www.boot.dev/courses/build-ai-agent-python) featuring an AI Agent in Python
 
 ## Prerequisites
+
+- Python 3.10+ installed 
+- The [uv](https://github.com/astral-sh/uv) project/package manager ([installation docs](https://docs.astral.sh/uv/getting-started/installation/))
+- Access to a Unix-like shell (e.g., `zsh` or `bash`)
+
+## Learning Goals
+
+The learning goals of this project are as follows:
+
+1. Get an introduction to multi-directory Python projects.
+2. Understand how the AI tools actually work under the hood.
+3. Practice Python and functional programming skills.
+
+## Installation
 
 1. Open your terminal, then copy-paste this command to clone this project (download this project) to your computer:
 
