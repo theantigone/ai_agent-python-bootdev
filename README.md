@@ -34,13 +34,13 @@ The learning goals of this project are as follows:
 1. Open your terminal, then copy-paste this command to clone this project (download this project) to your computer:
 
 ```bash
-git clone https://github.com/theantigone/bootdev-ai-agent.git
+git clone https://github.com/theantigone/ai_agent-python-bootdev.git
 ```
 
 2. Change the current directory to the root of this project:
 
 ```bash
-cd bootdev-ai-agent/
+cd ai_agent-python-bootdev/
 ```
 
 3. Create a virtual environment using [`uv`](https://github.com/astral-sh/uv) at the root of this project directory:
