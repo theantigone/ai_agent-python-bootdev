@@ -3,10 +3,15 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
+- [Description](#description)
 - [Prerequisites](#prerequisites)
 - [Running the Agentic AI](#running-the-agentic-ai)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Description
+
+A guided project from [boot.dev](https://www.boot.dev/courses/build-ai-agent-python) featuring an AI Agent in Python
 
 ## Prerequisites
 
