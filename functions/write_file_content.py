@@ -1,4 +1,5 @@
 import os
+from google.genai import types
 
 
 def write_file(working_directory, file_path, content):
@@ -14,7 +15,6 @@ def write_file(working_directory, file_path, content):
     # checks if the file path exists
     if not os.path.exists(abs_file_path):
         try:
-
             # creates the directory; if it exists, continue
             os.makedirs(os.path.dirname(abs_file_path), exist_ok=True)
 
@@ -26,7 +26,6 @@ def write_file(working_directory, file_path, content):
         return f'Error: "{file_path}" is a directory, not a file'
 
     try:
-
         # overwrites file_path's contents to content
         with open(abs_file_path, "w") as f:
             f.write(content)
@@ -38,3 +37,23 @@ def write_file(working_directory, file_path, content):
     # checks if any errors have been raised
     except Exception as e:
         return f'Error: writing to file "{file_path}": {e}'
+
+
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="write or overwrite files",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="file path to the file",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="content to write or overwrite to the file",
+            ),
+        },
+        required=["file_path", "content"],
+    ),
+)
