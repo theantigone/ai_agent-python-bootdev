@@ -40,13 +40,13 @@ def get_file_content(working_directory, file_path):
 
 schema_get_file_content = types.FunctionDeclaration(
     name="get_file_content",
-    description="read file contents",
+	description=f"Retrieves the content (at most {MAX_CHARS} characters) of a specified file within the working directory",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(
                 type=types.Type.STRING,
-                description="file path to the file",
+				description="Path to the file to read, relative to the working directory",
             ),
         },
         required=["file_path"],
