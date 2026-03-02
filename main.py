@@ -39,8 +39,12 @@ def main():
 def generate_content(client, messages, verbose):
 	response = client.models.generate_content(
 			# model="gemini-2.0-flash-001",
-			model="gemini-2.5-flash",
+			#model="gemini-2.0-flash",
+			# model="gemini-2.5-flash",
 			# model="gemini-2.5-flash-lite",
+			# model="gemini-3-flash-preview",
+			#model="gemini-3-pro-preview",
+			#model="gemini-3.1-pro-preview",
 			contents=messages,
 			config=types.GenerateContentConfig(
 				tools=[available_functions], system_instruction=system_prompt
@@ -55,6 +59,8 @@ def generate_content(client, messages, verbose):
 		print(response.text)
 		return
 
+	function_results=[]
+
 	for function_call in response.function_calls:
 		function_call_result=call_function(function_call,verbose)
 		if not function_call_result.parts:
@@ -63,8 +69,7 @@ def generate_content(client, messages, verbose):
 			raise Exception
 		if not function_call_result.parts[0].function_response.response:
 			raise Exception
-		function_results=[]
-		function_results.append(function_call_results.parts[0])
+		function_results.append(function_call_result.parts[0])
 		if verbose:
 			print(f"-> {function_call_result.parts[0].function_response.response}")
 		print(f"Calling function: {function_call.name}({function_call.args})")
