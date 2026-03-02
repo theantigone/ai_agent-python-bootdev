@@ -40,7 +40,7 @@ def generate_content(client, messages, verbose):
 	response = client.models.generate_content(
 			# model="gemini-2.0-flash-001",
 			#model="gemini-2.0-flash",
-			# model="gemini-2.5-flash",
+			model="gemini-2.5-flash",
 			# model="gemini-2.5-flash-lite",
 			# model="gemini-3-flash-preview",
 			#model="gemini-3-pro-preview",
@@ -59,20 +59,20 @@ def generate_content(client, messages, verbose):
 		print(response.text)
 		return
 
-	function_results=[]
+	function_responses = []
 
-	for function_call in response.function_calls:
-		function_call_result=call_function(function_call,verbose)
-		if not function_call_result.parts:
-			raise Exception
-		if not function_call_result.parts[0].function_response:
-			raise Exception
-		if not function_call_result.parts[0].function_response.response:
-			raise Exception
-		function_results.append(function_call_result.parts[0])
-		if verbose:
-			print(f"-> {function_call_result.parts[0].function_response.response}")
-		print(f"Calling function: {function_call.name}({function_call.args})")
+    for function_call in response.function_calls:
+        result = call_function(function_call, verbose)
+        if (
+            not result.parts
+            or not result.parts[0].function_response
+            or not result.parts[0].function_response.response
+        ):
+            raise RuntimeError(f"Empty function response for {function_call.name}")
+        if verbose:
+            print(f"-> {result.parts[0].function_response.response}")
+        function_responses.append(result.parts[0])
+		#print(f"Calling function: {function_call.name}({function_call.args})")
 
 
 if __name__ == "__main__":
