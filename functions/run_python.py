@@ -22,7 +22,7 @@ def run_python_file(working_directory, file_path, args=None):
 
     # try catch block to catch any exceptions when running the subprocess
     try:
-        # NOTE: the "args" in "subprocess.run()" is the terminal command (e.g. "ls")
+        # NOTE: the "args" in "subprocess.run()" is the terminal command (e.g., "ls")
         commands = ["python", abs_file_path]  # "file_path" probably works fine here
 
         # the "args" in this code represents the argument after "python <name>.py"

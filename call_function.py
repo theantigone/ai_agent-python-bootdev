@@ -1,9 +1,9 @@
 from google.genai import types
 
-from functions.get_files_info import schema_get_files_info
-from functions.get_file_content import schema_get_file_content
-from functions.run_python import schema_run_python_file
-from functions.write_file_content import schema_write_file
+from functions.get_files_info import schema_get_files_info,get_files_info
+from functions.get_file_content import schema_get_file_content,get_file_content
+from functions.run_python import schema_run_python_file,run_python_file
+from functions.write_file_content import schema_write_file,write_file
 
 available_functions = types.Tool(
     function_declarations=[
@@ -17,7 +17,8 @@ available_functions = types.Tool(
 def call_function(function_call, verbose=False):
 	if verbose:
 		print(f"Calling function: {function_call.name}({function_call.args})")
-	print(f" - Calling function: {function_call.name}")
+	else:
+		print(f" - Calling function: {function_call.name}")
 	function_map = {
 		"get_file_content": get_file_content,
 		"get_files_info": get_files_info,
@@ -38,7 +39,13 @@ def call_function(function_call, verbose=False):
 		)
 	args = dict(function_call.args) if function_call.args else {}
 	args['working_directory']='./calculator'
-	function_result=function_map[function_call](**args)
+	print('---------------------------')
+	print(function_call)
+	print(function_name)
+	print(args)
+	print(function_map[function_name])
+	print('---------------------------')
+	function_result=function_map[function_name](**args)
 	return types.Content(
 		role="tool",
 		parts=[
