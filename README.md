@@ -15,6 +15,8 @@
 
 A guided project from [boot.dev](https://www.boot.dev/courses/build-ai-agent-python) featuring an AI Agent in Python
 
+Completed 3/4/2026 12:40 AM EST
+
 ## Prerequisites
 
 - Python 3.10+ installed 
